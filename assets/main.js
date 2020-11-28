@@ -12,8 +12,22 @@ $(function(){
     var btnNext = $('div.next');
     var btnPrev = $('div.prev');
     
-    
-    
+
+
+
+    $( "html" ).on( "keydown", function(e) {
+        var code = e.keyCode;
+        
+        switch(code){
+            case 39:
+            $(".next").trigger( "click" );
+            break;
+            case 37:
+            $(".prev").trigger( "click" );
+            break;
+        }
+			
+	});
     // Creo la funzione per il pulsante next.
     btnNext.click(function () {
         var activeImg = $('img.active');
@@ -70,4 +84,8 @@ $(function(){
         
     });
     
+
+
+
+
 });
