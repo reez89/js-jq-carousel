@@ -40,46 +40,64 @@
 //     }
     
 // });
+$(function(){
 
-var btnNext = $('div.next');
-var btnPrev = $('div.prev');
-
-btnNext.click(function () {
-    var activeImg = $('img.active');
-    var dots = $('i.active')
-    var immaginiNext = activeImg.next();
-
-    if(immaginiNext.hasClass('last active')){
-        activeImg.first().addClass('active');
-        
-    }
-    activeImg.removeClass('active');
-    immaginiNext.addClass('active');
-
-    dots.removeClass('active');
-    dots.next().addClass('active');
-
+    var btnNext = $('div.next');
+    var btnPrev = $('div.prev');
     
- })
-
-
-
-btnPrev.click(function () {
-    var activeImg = $('img.active');
-    var dots = $('i.active')
-    var immaginiPrev = activeImg.prev();
-
-    if(immaginiPrev.hasClass('last active')){
-        activeImg.first().addClass('active');
-        
-    }
-    activeImg.removeClass('active');
-    immaginiPrev.addClass('active');
-
-    dots.removeClass('active');
-    dots.prev().addClass('active');
-
     
- })
+    
+    // Creo la funzione per il pulsante next.
+    btnNext.click(function () {
+        var activeImg = $('img.active');
+        var firstImg = $('img.first');
+        var dots = $('i.active')
+        var firstDot = $ ('i.first');
+        var immaginiNext = activeImg.next();
+        
+        if(activeImg.hasClass('last active')){
+            activeImg.removeClass('active') && firstImg.addClass('active');
+        }else{
+            activeImg.removeClass('active')
+            immaginiNext.addClass('active')
+        }
+        
+        if(dots.hasClass('last active')){
+            dots.removeClass('active') && firstDot.addClass('active');
+        }else{
+            dots.removeClass('active')
+            dots.next().addClass('active')
+        }
 
-// body > div > div > div.images > img.last.active
+
+    });
+    
+    
+    // Creo la funzione per il pulsante prev.
+    
+    btnPrev.click(function () {
+        var activeImg = $('img.active');
+        var lastImg =$('img.last');
+        var lastDot = $ ('i.last');
+        var dots = $('i.active')
+        var immaginiPrev = activeImg.prev();
+
+        if(activeImg.hasClass('active') && !activeImg.hasClass('first')){
+            activeImg.removeClass('active') && immaginiPrev.addClass('active');
+        }else{
+            activeImg.removeClass('active')
+            lastImg.addClass('active')
+        }
+        
+        if(dots.hasClass('active') && !dots.hasClass('first')){
+             dots.removeClass('active') && dots.prev().addClass('active');
+         }else{
+             dots.removeClass('active')
+             lastDot.addClass('active')
+         }
+        
+        
+        
+    });
+    
+});
