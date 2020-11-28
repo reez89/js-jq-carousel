@@ -7,39 +7,6 @@
 // Utiliziamo una classe first e last  per capire quali sono la prima e ultima immagine dello slider
 // Utilizziamo una classe active per aiutarci a capire quale è l’immagine attuale da visualizzare nello slider
 
-// Le variabili riguardanti le immagini sono stati dichiarate all'interno della funzione, perchè servono solo all'interno di essa.
-
-
-
-// // Creo la funzione per il pulsante avanti.
-// btnNext.click(function(){
-//     console.log("clicked");
-//     var immagini = $('.active');
-//     var immaginiNext = immagini.next();
-//     if(immaginiNext.length){
-//         immagini.removeClass('active').css('z-index', -10);
-//         immaginiNext.addClass('active').css('z-index', 10);
-//     }
-
-//     if(immaginiNext.hasClass('first')){
-//         immagini.removeClass('active').css('z-index', -10);
-//         immaginiNext.addClass('active').css('z-index', 10);
-//     }
-
-// });
-
-
-// btnPrev.click(function(){
-//     console.log("clicked");
-//     var immagini = $('.active');
-//     var immaginiPrev = immagini.prev();
-
-//     if(immaginiPrev.length){
-//         immagini.removeClass('active').css('z-index', -10);
-//         immaginiPrev.addClass('active').css('z-index', 10);
-//     }
-    
-// });
 $(function(){
 
     var btnNext = $('div.next');
@@ -55,13 +22,15 @@ $(function(){
         var firstDot = $ ('i.first');
         var immaginiNext = activeImg.next();
         
+        // SE L'IMMAGINE HA CLASSE ACTIVE ED ANCHE LAST ALLORA RIMUOVERO LA CLASSE ACTIVE  E LA AGGIUGERO' ALL'IMMAGINE CHE HA CLASSE FIRST.
+        
         if(activeImg.hasClass('last active')){
             activeImg.removeClass('active') && firstImg.addClass('active');
-        }else{
+        }else{ // ALTRIMENTI RIMUOVO LA CLASSE ACTIVE DALL'IMMAGINE CORRENTE E LA AGGIUNGO ALLA PROSSIMA.
             activeImg.removeClass('active')
             immaginiNext.addClass('active')
         }
-        
+        // LO STESSO PROCEDIMENTO DESCRITTO SOPRA LO APPLICO AI CERCHI. 
         if(dots.hasClass('last active')){
             dots.removeClass('active') && firstDot.addClass('active');
         }else{
@@ -74,7 +43,7 @@ $(function(){
     
     
     // Creo la funzione per il pulsante prev.
-    
+
     btnPrev.click(function () {
         var activeImg = $('img.active');
         var lastImg =$('img.last');
@@ -82,21 +51,22 @@ $(function(){
         var dots = $('i.active')
         var immaginiPrev = activeImg.prev();
 
+        // SE L'IMMAGINE HA CLASSE ACTIVE MA NON HA CLASSE FIRST, ALLORA RIMUOVO LA CLASSE ACTIVE E LA AGGIUNGO ALLA PRECEDENTE.
         if(activeImg.hasClass('active') && !activeImg.hasClass('first')){
             activeImg.removeClass('active') && immaginiPrev.addClass('active');
-        }else{
+        }else{ // ALTRIMENTI RIMUOVO LA CLASSE ACTIVE DALL'A PRIMA IMMAGINE, A LA ASSEGNO ALL'ULTIMA IN MODO TALE DA VISUALIZZARLA SE MI TROVO IN POSIZIONE 1 DEL CONTENITORE DELLE IMMAGINI.
             activeImg.removeClass('active')
             lastImg.addClass('active')
         }
         
+
+        // LO STESSO PROCEDIMENTO DESCRITTO SOPRA LO APPLICO AI CERCHI.
         if(dots.hasClass('active') && !dots.hasClass('first')){
              dots.removeClass('active') && dots.prev().addClass('active');
          }else{
              dots.removeClass('active')
              lastDot.addClass('active')
          }
-        
-        
         
     });
     
